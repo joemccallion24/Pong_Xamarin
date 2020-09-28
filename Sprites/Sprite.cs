@@ -2,6 +2,8 @@
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework;
 using System.Collections.Generic;
+using MonoGameV2.Models;
+
 namespace MonoGameV2.Sprites
 {
     public class Sprite
@@ -11,6 +13,7 @@ namespace MonoGameV2.Sprites
         public Vector2 position;
         public Vector2 velocity;
         public float speed;
+        public Input input;
         
 
         public Rectangle rectangle

@@ -19,7 +19,7 @@ namespace MonoGameV2
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.DrawString(_font, playerScore.ToString(), new Vector2(300, 70), Color.White);
+            spriteBatch.DrawString(_font, playerScore.ToString(), new Vector2(320, 70), Color.White);
             spriteBatch.DrawString(_font, AIscore.ToString(), new Vector2(450, 70), Color.White);
         }
 

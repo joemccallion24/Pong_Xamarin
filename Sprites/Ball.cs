@@ -17,7 +17,7 @@ namespace MonoGameV2.Sprites
 
             public Ball(Texture2D texture) : base(texture)
             {
-                speed = 2f;
+                speed = 4f;
             }
 
             public override void Update(GameTime gameTime, List<Sprite> sprites)
@@ -78,11 +78,18 @@ namespace MonoGameV2.Sprites
                     case 3:
                         velocity = new Vector2(1, -1);
                         break;
-                }
+            }
 
-                position = (Vector2)startPosition; //casting as startPosition is nullable
+            position = (Vector2)startPosition; //casting as startPosition is nullable
                 speed = (float)startSpeed;
                 isPlaying = false;
             }
+
+        public float getPosY()
+        {
+            return position.Y;
+        }
+
+
         }
 }
