@@ -14,6 +14,7 @@ namespace MonoGameV2.Sprites
         public Vector2 velocity;
         public float speed;
         public Input input;
+        public float? offset;
         
 
         public Rectangle rectangle
@@ -72,5 +73,9 @@ namespace MonoGameV2.Sprites
               this.rectangle.Left < sprite.rectangle.Right;
         }
 
+        public Vector2 getPosition()
+        {
+            return position;
+        }
     }
 }

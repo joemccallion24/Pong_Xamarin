@@ -1,6 +1,7 @@
 ﻿using System;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Input.Touch;
 using Microsoft.Xna.Framework.Input;
 using System.Collections.Generic;
 
@@ -13,11 +14,12 @@ namespace MonoGameV2.Sprites
             private Vector2? startPosition = null; //'?' allows the vector2 to be null 
             private float? startSpeed;
             private bool isPlaying;
+            
 
 
             public Ball(Texture2D texture) : base(texture)
             {
-                speed = 4f;
+                speed = 3f;
             }
 
             public override void Update(GameTime gameTime, List<Sprite> sprites)
@@ -26,12 +28,13 @@ namespace MonoGameV2.Sprites
                 {
                     startPosition = position;
                     startSpeed = speed;
-
                     restart();
                 }
 
-                if (Keyboard.GetState().IsKeyDown(Keys.Space)) isPlaying = true; //this is just a placeholder until a start  button is created
+                MouseState state = Mouse.GetState();
+                if (state.LeftButton == ButtonState.Pressed) isPlaying = true; //this is just a placeholder until a start  button is created
                 if (!isPlaying) return;
+                
 
                 //keeping the ball on the screen my bouncing off top and bottom
                 if (position.Y <= 0 || position.Y + _texture.Height >= Game1.screenHeight) velocity.Y = -velocity.Y;
@@ -85,11 +88,5 @@ namespace MonoGameV2.Sprites
                 isPlaying = false;
             }
 
-        public float getPosY()
-        {
-            return position.Y;
-        }
-
-
-        }
+    }
 }

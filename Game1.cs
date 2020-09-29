@@ -15,12 +15,10 @@ namespace MonoGameV2
         public static int screenWidth;
         public static int screenHeight;
         public static Random random;
-
+        private Ball ball;
+        private AIPlayer AIplayer;
         private List<Sprite> sprites;
         private Score score;
-        private Ball ball;
-
-        
 
         public Game1()
         {
@@ -50,34 +48,27 @@ namespace MonoGameV2
 
             score = new Score(Content.Load<SpriteFont>("File"));
 
+            ball = new Ball(ballTexture)
+            {
+                position = new Vector2((screenWidth / 2) - (ballTexture.Width / 2), (screenHeight / 2) - (ballTexture.Height / 2)), //positions the ball in the centre of the screen
+                score = score,
+            };
+            AIplayer = new AIPlayer(player2Texture)
+            {
+                position = new Vector2(740, (screenHeight / 2) - (playerTexture.Height / 2)),
+            };
 
             //load in the sprites
             sprites = new List<Sprite>()
             {
                 new Sprite(Content.Load<Texture2D>("Background")),
-                new Ball(ballTexture)
-                {
-                    position = new Vector2((screenWidth / 2) - (ballTexture.Width / 2), (screenHeight / 2) - (ballTexture.Height / 2)), //positions the ball in the centre of the screen
-                    score = score,
-                },
+                ball,
                 new Player(playerTexture)
                 {
                     position = new Vector2(20, (screenHeight/2) - (playerTexture.Height/2)),
-                    input = new Models.Input()
-                    {
-                        up = Keys.W,
-                        down = Keys.S,
-                    }
+                    
                 },
-                new Player(player2Texture)
-                {
-                    position = new Vector2(740,(screenHeight/2) - (playerTexture.Height/2)),
-                    input = new Models.Input()
-                    {
-                        up = Keys.Up,
-                        down = Keys.Down,
-                    }
-                },
+                AIplayer,
             };
         }
 
@@ -92,7 +83,7 @@ namespace MonoGameV2
                 sprite.Update(gameTime, sprites);
             }
 
-
+            AIMove();
             base.Update(gameTime);
         }
 
@@ -109,11 +100,23 @@ namespace MonoGameV2
 
             _spriteBatch.End();
 
-
             base.Draw(gameTime);
         }
 
-        
-           
+        public void AIMove()
+        {
+            if (ball.position.Y > AIplayer.position.Y && ball.position.X > screenWidth/2)
+            {
+                AIplayer.velocity.Y = AIplayer.speed;
+            }
+            else if (ball.position.Y < AIplayer.position.Y && ball.position.X > screenWidth / 2)
+            {
+                AIplayer.velocity.Y = -AIplayer.speed;
+            }
+            else if (ball.position.Y == AIplayer.position.Y && ball.position.X > screenWidth / 2)
+            {
+                AIplayer.velocity.Y = 0;
+            }
+        }
     }
 }

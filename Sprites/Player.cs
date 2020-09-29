@@ -19,21 +19,25 @@ namespace MonoGameV2.Sprites
         public override void Update(GameTime gameTime, List<Sprite> sprites)
         {
             //if (input == null) throw new Exception("give input");
-
-            if (Keyboard.GetState().IsKeyDown(input.up))
+            MouseState state = Mouse.GetState();
+            if (state.LeftButton == ButtonState.Pressed)
             {
-                velocity.Y = -speed;
-            } else if (Keyboard.GetState().IsKeyDown(input.down))
-            {
-                velocity.Y = speed;
+                if(position.Y -1 < state.Y){
+                    velocity.Y = speed;
+                } else if(position.Y > state.Y)
+                {
+                    velocity.Y = -speed;
+                }
+                else if(position.Y == state.Y)
+                {
+                    velocity.Y = 0;
+                }
             }
 
             position += velocity;
-
             position.Y = MathHelper.Clamp(position.Y, 0, Game1.screenHeight - _texture.Height);
 
             velocity = Vector2.Zero;
         }
-
     }
 }
