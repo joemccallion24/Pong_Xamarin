@@ -23,16 +23,13 @@ namespace MonoGameV2.Sprites
             if (state.LeftButton == ButtonState.Pressed)
             {
                 if((position.Y + _texture.Height/2) < state.Y){
-                    speed = 5;
-                    velocity.Y = speed;
-                } else if ((position.Y + _texture.Height / 2) > state.Y)
+                        velocity.Y = speed;
+                } else if (position.Y > (state.Y - _texture.Height/2.5))
                 {
-                    speed = 5;
                     velocity.Y = -speed;
                 }
                 else if((position.Y + _texture.Height / 2) == state.Y)
                 {
-                    speed = 0;
                     velocity.Y = 0;
                 }
             }
