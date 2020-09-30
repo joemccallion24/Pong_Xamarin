@@ -14,7 +14,10 @@ namespace MonoGameV2.Sprites
             private Vector2? startPosition = null; //'?' allows the vector2 to be null 
             private float? startSpeed;
             private bool isPlaying;
-            
+            private float timer = 0;
+
+            //ball speed increases every 5 seconds
+            public int incrementSpeed = 5;
 
 
             public Ball(Texture2D texture) : base(texture)
@@ -34,7 +37,13 @@ namespace MonoGameV2.Sprites
                 MouseState state = Mouse.GetState();
                 if (state.LeftButton == ButtonState.Pressed) isPlaying = true; //this is just a placeholder until a start  button is created
                 if (!isPlaying) return;
-                
+
+            timer += (float)gameTime.ElapsedGameTime.TotalSeconds;
+            if(timer > incrementSpeed)
+            {
+                speed++;
+                timer = 0;
+            }
 
                 //keeping the ball on the screen my bouncing off top and bottom
                 if (position.Y <= 0 || position.Y + _texture.Height >= Game1.screenHeight) velocity.Y = -velocity.Y;
@@ -86,6 +95,7 @@ namespace MonoGameV2.Sprites
             position = (Vector2)startPosition; //casting as startPosition is nullable
                 speed = (float)startSpeed;
                 isPlaying = false;
+                timer = 0;
             }
 
     }

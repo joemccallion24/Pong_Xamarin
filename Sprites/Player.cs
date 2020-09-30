@@ -22,14 +22,17 @@ namespace MonoGameV2.Sprites
             MouseState state = Mouse.GetState();
             if (state.LeftButton == ButtonState.Pressed)
             {
-                if(position.Y -1 < state.Y){
+                if((position.Y + _texture.Height/2) < state.Y){
+                    speed = 5;
                     velocity.Y = speed;
-                } else if(position.Y > state.Y)
+                } else if ((position.Y + _texture.Height / 2) > state.Y)
                 {
+                    speed = 5;
                     velocity.Y = -speed;
                 }
-                else if(position.Y == state.Y)
+                else if((position.Y + _texture.Height / 2) == state.Y)
                 {
+                    speed = 0;
                     velocity.Y = 0;
                 }
             }
