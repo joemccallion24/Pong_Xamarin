@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <SourceFile>/Users/josefmccallion/MonoGameV2/Content/Player1.png</SourceFile>
-  <SourceTime>2020-09-28T12:45:20.1914015+01:00</SourceTime>
+  <SourceTime>2020-09-28T15:50:13.4691772+01:00</SourceTime>
   <DestFile>/Users/josefmccallion/MonoGameV2/Content/bin/DesktopGL/Player1.xnb</DestFile>
-  <DestTime>2020-09-28T12:52:51.7050721+01:00</DestTime>
+  <DestTime>2020-09-30T15:52:49.9323246+01:00</DestTime>
   <Importer>TextureImporter</Importer>
   <ImporterTime>2018-12-08T16:35:14+00:00</ImporterTime>
   <Processor>TextureProcessor</Processor>

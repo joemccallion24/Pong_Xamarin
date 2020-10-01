@@ -4,6 +4,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Input.Touch;
+using MonoGameV2.States;
 
 namespace MonoGameV2.Sprites
 {
@@ -35,7 +36,7 @@ namespace MonoGameV2.Sprites
             }
 
             position += velocity;
-            position.Y = MathHelper.Clamp(position.Y, 0, Game1.screenHeight - _texture.Height);
+            position.Y = MathHelper.Clamp(position.Y, 0, GameState.screenHeight - _texture.Height);
 
             velocity = Vector2.Zero;
         }

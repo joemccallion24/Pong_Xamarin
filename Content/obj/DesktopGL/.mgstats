@@ -1,5 +1,6 @@
 Source File,Dest File,Processor Type,Content Type,Source File Size,Dest File Size,Build Seconds
-"/Users/josefmccallion/MonoGameV2/Content/background.png","/Users/josefmccallion/MonoGameV2/Content/bin/DesktopGL/background.xnb","TextureProcessor","Texture2DContent",2434,201281,0.144818
-"/Users/josefmccallion/MonoGameV2/Content/Ball.png","/Users/josefmccallion/MonoGameV2/Content/bin/DesktopGL/Ball.xnb","TextureProcessor","Texture2DContent",2486,3685,0.127218
-"/Users/josefmccallion/MonoGameV2/Content/Player1.png","/Users/josefmccallion/MonoGameV2/Content/bin/DesktopGL/Player1.xnb","TextureProcessor","Texture2DContent",8067,24085,0.009753
-"/Users/josefmccallion/MonoGameV2/Content/player2.png","/Users/josefmccallion/MonoGameV2/Content/bin/DesktopGL/player2.xnb","TextureProcessor","Texture2DContent",7328,22485,0.004366
+"/Users/josefmccallion/MonoGameV2/Content/background.png","/Users/josefmccallion/MonoGameV2/Content/bin/DesktopGL/background.xnb","TextureProcessor","Texture2DContent",70188,1536085,0.238127
+"/Users/josefmccallion/MonoGameV2/Content/Ball.png","/Users/josefmccallion/MonoGameV2/Content/bin/DesktopGL/Ball.xnb","TextureProcessor","Texture2DContent",2486,3685,0.005362
+"/Users/josefmccallion/MonoGameV2/Content/Button.png","/Users/josefmccallion/MonoGameV2/Content/bin/DesktopGL/Button.xnb","TextureProcessor","Texture2DContent",324,25685,0.002181
+"/Users/josefmccallion/MonoGameV2/Content/Player1.png","/Users/josefmccallion/MonoGameV2/Content/bin/DesktopGL/Player1.xnb","TextureProcessor","Texture2DContent",5020,5417,0.002368
+"/Users/josefmccallion/MonoGameV2/Content/player2.png","/Users/josefmccallion/MonoGameV2/Content/bin/DesktopGL/player2.xnb","TextureProcessor","Texture2DContent",6018,9109,0.00226

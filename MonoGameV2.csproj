@@ -30,5 +30,7 @@
   <ItemGroup>
     <Folder Include="Sprites\" />
     <Folder Include="Models\" />
+    <Folder Include="States\" />
+    <Folder Include="Controls\" />
   </ItemGroup>
 </Project>

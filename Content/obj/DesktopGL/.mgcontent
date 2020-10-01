@@ -6,10 +6,12 @@
   <SourceFiles>
     <File>/Users/josefmccallion/MonoGameV2/Content/background.png</File>
     <File>/Users/josefmccallion/MonoGameV2/Content/Ball.png</File>
+    <File>/Users/josefmccallion/MonoGameV2/Content/Button.png</File>
     <File>/Users/josefmccallion/MonoGameV2/Content/Player1.png</File>
     <File>/Users/josefmccallion/MonoGameV2/Content/player2.png</File>
   </SourceFiles>
   <DestFiles>
+    <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />

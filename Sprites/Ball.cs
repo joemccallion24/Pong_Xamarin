@@ -4,6 +4,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input.Touch;
 using Microsoft.Xna.Framework.Input;
 using System.Collections.Generic;
+using MonoGameV2.States;
 
 namespace MonoGameV2.Sprites
 {
@@ -46,7 +47,7 @@ namespace MonoGameV2.Sprites
             }
 
                 //keeping the ball on the screen my bouncing off top and bottom
-                if (position.Y <= 0 || position.Y + _texture.Height >= Game1.screenHeight) velocity.Y = -velocity.Y;
+                if (position.Y <= 0 || position.Y + _texture.Height >= GameState.screenHeight) velocity.Y = -velocity.Y;
 
                 //if the ball goes left or right the appropriate score increments
                 if (position.X <= 0)
@@ -54,7 +55,7 @@ namespace MonoGameV2.Sprites
                     score.AIscore++;
                     restart();
                 }
-                if (position.X + _texture.Width >= Game1.screenWidth)
+                if (position.X + _texture.Width >= GameState.screenWidth)
                 {
                     score.playerScore++;
                     restart();
@@ -74,7 +75,7 @@ namespace MonoGameV2.Sprites
 
             private void restart()
             {
-                var direction = Game1.random.Next(0, 4); //four directions
+                var direction = GameState.random.Next(0, 4); //four directions
 
                 switch (direction)
                 {
