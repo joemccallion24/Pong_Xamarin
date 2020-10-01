@@ -1,29 +1,30 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using MonoGameV2.Controls;
-
 namespace MonoGameV2.States
 {
-    public class MenuState : State
+    public class Endgame : State
     {
         private List<Component> _components;
 
-        public MenuState(Game1 game, GraphicsDevice graphicsDevice, ContentManager content)
-          : base(game, graphicsDevice, content)
+        public Endgame(Game1 game, GraphicsDevice graphicsDevice, ContentManager content) : base(game, graphicsDevice, content)
         {
             var buttonTexture = _content.Load<Texture2D>("Button");
             var buttonFont = _content.Load<SpriteFont>("ButtonFont");
 
-            var newGameButton = new Button(buttonTexture, buttonFont)
+            var RestartGameButton = new Button(buttonTexture, buttonFont)
             {
                 Position = new Vector2(300, 250),
-                Text = "New Game",
+                Text = "Play Again",
             };
 
-            newGameButton.Click += NewGameButton_Click;
+            RestartGameButton.Click += RestartGameButton_Click;
 
             var quitGameButton = new Button(buttonTexture, buttonFont)
             {
@@ -35,7 +36,7 @@ namespace MonoGameV2.States
 
             _components = new List<Component>()
       {
-        newGameButton,
+        RestartGameButton,
         quitGameButton,
       };
         }
@@ -50,25 +51,25 @@ namespace MonoGameV2.States
             spriteBatch.End();
         }
 
-        private void NewGameButton_Click(object sender, EventArgs e)
+        private void RestartGameButton_Click(object sender, EventArgs e)
         {
             _game.changeState(new GameState(_game, _graphicsDevice, _content));
         }
 
         public override void PostUpdate(GameTime gameTime)
         {
-            // remove sprites if they're not needed
+            //removsprites
+        }
+
+        private void QuitGameButton_Click(object sender, EventArgs e)
+        {
+            _game.Exit();
         }
 
         public override void Update(GameTime gameTime)
         {
             foreach (var component in _components)
                 component.Update(gameTime);
-        }
-
-        private void QuitGameButton_Click(object sender, EventArgs e)
-        {
-            _game.Exit();
         }
     }
 }

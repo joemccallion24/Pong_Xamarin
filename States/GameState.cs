@@ -10,7 +10,6 @@ namespace MonoGameV2.States
 {
     public class GameState : State
     {
-        private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
 
         public static int screenWidth = Game1.screenWidth;
@@ -64,8 +63,12 @@ namespace MonoGameV2.States
                 sprite.Update(gameTime, sprites);
             }
 
-
             AIMove();
+
+            if(score.playerScore == 5 || score.AIscore == 5)
+            {
+                _game.changeState(new Endgame(_game, _graphicsDevice, _content));
+            }
             //base.Update(gameTime);
 
         }
