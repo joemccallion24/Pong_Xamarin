@@ -49,7 +49,6 @@ namespace MonoGameV2.States
                 new Player(playerTexture)
                 {
                     position = new Vector2(20, (screenHeight/2) - (playerTexture.Height/2)),
-
                 },
                 AIplayer,
             };
@@ -94,8 +93,6 @@ namespace MonoGameV2.States
 
         }
         
-        
-
         public void AIMove()
         {
             if (ball.position.Y > AIplayer.position.Y && ball.position.X > screenWidth / 2)

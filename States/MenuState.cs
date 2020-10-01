@@ -4,6 +4,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using MonoGameV2.Controls;
+using MonoGameV2.Sprites;
 
 namespace MonoGameV2.States
 {
@@ -11,15 +12,18 @@ namespace MonoGameV2.States
     {
         private List<Component> _components;
 
+        private List<Sprite> sprites;
+
         public MenuState(Game1 game, GraphicsDevice graphicsDevice, ContentManager content)
           : base(game, graphicsDevice, content)
         {
             var buttonTexture = _content.Load<Texture2D>("Button");
             var buttonFont = _content.Load<SpriteFont>("ButtonFont");
+            
 
             var newGameButton = new Button(buttonTexture, buttonFont)
             {
-                Position = new Vector2(300, 250),
+                Position = new Vector2(330, 250),
                 Text = "New Game",
             };
 
@@ -27,7 +31,7 @@ namespace MonoGameV2.States
 
             var quitGameButton = new Button(buttonTexture, buttonFont)
             {
-                Position = new Vector2(300, 300),
+                Position = new Vector2(330, 300),
                 Text = "Quit Game",
             };
 
@@ -38,11 +42,17 @@ namespace MonoGameV2.States
         newGameButton,
         quitGameButton,
       };
+            sprites = new List<Sprite>()
+            {
+             new Sprite(_content.Load<Texture2D>("menuBackground")),
+        };
         }
 
         public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
         {
             spriteBatch.Begin();
+
+            foreach (var sprite in sprites) sprite.Draw(spriteBatch);
 
             foreach (var component in _components)
                 component.Draw(gameTime, spriteBatch);

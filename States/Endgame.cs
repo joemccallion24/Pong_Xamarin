@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
@@ -20,15 +17,23 @@ namespace MonoGameV2.States
 
             var RestartGameButton = new Button(buttonTexture, buttonFont)
             {
-                Position = new Vector2(300, 250),
+                Position = new Vector2(330, 250),
                 Text = "Play Again",
             };
 
             RestartGameButton.Click += RestartGameButton_Click;
 
+            var MenuGameButton = new Button(buttonTexture, buttonFont)
+            {
+                Position = new Vector2(330, 300),
+                Text = "main Menu",
+            };
+
+            MenuGameButton.Click += MenuGameButton_Click;
+
             var quitGameButton = new Button(buttonTexture, buttonFont)
             {
-                Position = new Vector2(300, 300),
+                Position = new Vector2(330, 350),
                 Text = "Quit Game",
             };
 
@@ -37,8 +42,10 @@ namespace MonoGameV2.States
             _components = new List<Component>()
       {
         RestartGameButton,
+        MenuGameButton,
         quitGameButton,
       };
+
         }
 
         public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
@@ -54,6 +61,11 @@ namespace MonoGameV2.States
         private void RestartGameButton_Click(object sender, EventArgs e)
         {
             _game.changeState(new GameState(_game, _graphicsDevice, _content));
+        }
+
+        private void MenuGameButton_Click(object sender, EventArgs e)
+        {
+            _game.changeState(new MenuState(_game, _graphicsDevice, _content));
         }
 
         public override void PostUpdate(GameTime gameTime)

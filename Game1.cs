@@ -46,7 +46,6 @@ namespace MonoGameV2
 
             //use this.Content to load your game content here
             currentState = new MenuState(this, _graphics.GraphicsDevice, Content);
-            
         }
 
         protected override void Update(GameTime gameTime)
