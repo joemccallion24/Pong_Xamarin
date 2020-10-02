@@ -5,6 +5,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 using MonoGameV2.Sprites;
 using System;
+using MonoGameV2.Controls;
 
 namespace MonoGameV2.States
 {
@@ -15,9 +16,11 @@ namespace MonoGameV2.States
         public static int screenWidth = Game1.screenWidth;
         public static int screenHeight = Game1.screenHeight;
         public static Random random = Game1.random;
+        public string background;
         private Ball ball;
         private AIPlayer AIplayer;
         private List<Sprite> sprites;
+        private List<Component> _components;
         private Score score;
 
         public GameState(Game1 game, GraphicsDevice graphicsDevice, ContentManager content)
@@ -28,8 +31,22 @@ namespace MonoGameV2.States
             var ballTexture = _content.Load<Texture2D>("Ball");
             var playerTexture = _content.Load<Texture2D>("Player1");
             var player2Texture = _content.Load<Texture2D>("Player2");
+            var buttonTexture = _content.Load<Texture2D>("Home");
+            var buttonFont = _content.Load<SpriteFont>("ButtonFont");
 
             score = new Score(_content.Load<SpriteFont>("File"));
+
+            var HomeButton = new Button(buttonTexture, buttonFont)
+            {
+                Position = new Vector2(((screenWidth/2) - (buttonTexture.Width/2)), 450),
+                Text = "",
+            };
+            HomeButton.Click += HomeButton_Click;
+
+            _components = new List<Component>()
+      {
+        HomeButton,
+      };
 
             ball = new Ball(ballTexture)
             {
@@ -62,11 +79,18 @@ namespace MonoGameV2.States
                 sprite.Update(gameTime, sprites);
             }
 
+            foreach (var component in _components)
+                component.Update(gameTime);
+
             AIMove();
 
-            if(score.playerScore == 5 || score.AIscore == 5)
+            if(score.playerScore == 5)
             {
+                background = "MenuBackground";
                 _game.changeState(new Endgame(_game, _graphicsDevice, _content));
+            } else if(score.AIscore == 5)
+            {
+                _game.changeState(new EndGameLost(_game, _graphicsDevice, _content));
             }
             //base.Update(gameTime);
 
@@ -80,6 +104,8 @@ namespace MonoGameV2.States
             _spriteBatch.Begin();
 
             foreach (var sprite in sprites) sprite.Draw(_spriteBatch);
+            foreach (var component in _components)
+                component.Draw(gameTime, _spriteBatch);
 
             score.Draw(_spriteBatch);
 
@@ -107,6 +133,11 @@ namespace MonoGameV2.States
             {
                 AIplayer.velocity.Y = 0;
             }
+        }
+
+        private void HomeButton_Click(object sender, EventArgs e)
+        {
+            _game.changeState(new MenuState(_game, _graphicsDevice, _content));
         }
     }
 }

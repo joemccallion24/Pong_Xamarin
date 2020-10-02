@@ -4,6 +4,9 @@ Source File,Dest File,Processor Type,Content Type,Source File Size,Dest File Siz
 "/Users/josefmccallion/MonoGameV2/Content/Button.png","/Users/josefmccallion/MonoGameV2/Content/bin/DesktopGL/Content/Button.xnb","TextureProcessor","Texture2DContent",324,25685,0.235858
 "/Users/josefmccallion/MonoGameV2/Content/ButtonFont.spritefont","/Users/josefmccallion/MonoGameV2/Content/bin/DesktopGL/Content/ButtonFont.xnb","FontDescriptionProcessor","SpriteFontContent",2008,21538,0.137838
 "/Users/josefmccallion/MonoGameV2/Content/File.spritefont","/Users/josefmccallion/MonoGameV2/Content/bin/DesktopGL/Content/File.xnb","FontDescriptionProcessor","SpriteFontContent",2008,136226,0.32433
+"/Users/josefmccallion/MonoGameV2/Content/home.png","/Users/josefmccallion/MonoGameV2/Content/bin/DesktopGL/Content/home.xnb","TextureProcessor","Texture2DContent",2389,2585,0.191506
 "/Users/josefmccallion/MonoGameV2/Content/MenuBackground.png","/Users/josefmccallion/MonoGameV2/Content/bin/DesktopGL/Content/MenuBackground.xnb","TextureProcessor","Texture2DContent",421005,1536085,0.30972
+"/Users/josefmccallion/MonoGameV2/Content/MenuBackgroundLost.png","/Users/josefmccallion/MonoGameV2/Content/bin/DesktopGL/Content/MenuBackgroundLost.xnb","TextureProcessor","Texture2DContent",411094,1536085,0.318011
+"/Users/josefmccallion/MonoGameV2/Content/MenuBackgroundWin.png","/Users/josefmccallion/MonoGameV2/Content/bin/DesktopGL/Content/MenuBackgroundWin.xnb","TextureProcessor","Texture2DContent",411772,1536085,0.065766
 "/Users/josefmccallion/MonoGameV2/Content/Player1.png","/Users/josefmccallion/MonoGameV2/Content/bin/DesktopGL/Content/Player1.xnb","TextureProcessor","Texture2DContent",5020,5417,0.143416
 "/Users/josefmccallion/MonoGameV2/Content/player2.png","/Users/josefmccallion/MonoGameV2/Content/bin/DesktopGL/Content/player2.xnb","TextureProcessor","Texture2DContent",6018,9109,0.002068

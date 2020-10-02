@@ -8,12 +8,12 @@ using MonoGameV2.Sprites;
 
 namespace MonoGameV2.States
 {
-    public class Endgame : State
+    public class EndGameLost : State
     {
         private List<Component> _components;
         private List<Sprite> sprites;
 
-        public Endgame(Game1 game, GraphicsDevice graphicsDevice, ContentManager content) : base(game, graphicsDevice, content)
+        public EndGameLost(Game1 game, GraphicsDevice graphicsDevice, ContentManager content) : base(game, graphicsDevice, content)
         {
             var buttonTexture = _content.Load<Texture2D>("Button");
             var buttonFont = _content.Load<SpriteFont>("ButtonFont");
@@ -21,7 +21,7 @@ namespace MonoGameV2.States
             var RestartGameButton = new Button(buttonTexture, buttonFont)
             {
                 Position = new Vector2(330, 250),
-                Text = "Beat Him Again",
+                Text = "Try Again",
             };
 
             RestartGameButton.Click += RestartGameButton_Click;
@@ -50,7 +50,7 @@ namespace MonoGameV2.States
       };
             sprites = new List<Sprite>()
             {
-             new Sprite(_content.Load<Texture2D>("menuBackgroundWin")),
+             new Sprite(_content.Load<Texture2D>("menuBackgroundLost")),
         };
 
         }
