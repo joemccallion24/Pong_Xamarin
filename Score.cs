@@ -22,12 +22,5 @@ namespace MonoGameV2
             spriteBatch.DrawString(_font, playerScore.ToString(), new Vector2(320, 70), Color.White);
             spriteBatch.DrawString(_font, AIscore.ToString(), new Vector2(450, 70), Color.White);
         }
-
-        public void GameOver(SpriteBatch spriteBatch)
-        {
-            spriteBatch.DrawString(_font, "GAME OVER", new Vector2(225, 50), Color.White);
-        }
-
-
     }
 }

@@ -16,16 +16,20 @@ namespace MonoGameV2.States
         public static int screenWidth = Game1.screenWidth;
         public static int screenHeight = Game1.screenHeight;
         public static Random random = Game1.random;
-        public string background;
         private Ball ball;
         private AIPlayer AIplayer;
+        private Player Player1;
         private List<Sprite> sprites;
         private List<Component> _components;
         private Score score;
+        private int difficultyCase;
+        private float currentYPosition;
+        private bool Pause;
 
         public GameState(Game1 game, GraphicsDevice graphicsDevice, ContentManager content)
       : base(game, graphicsDevice, content)
         {
+            difficultyCase = 0;
             _spriteBatch = new SpriteBatch(_graphicsDevice);
             //use this.Content to load your game content here
             var ballTexture = _content.Load<Texture2D>("Ball");
@@ -33,19 +37,37 @@ namespace MonoGameV2.States
             var player2Texture = _content.Load<Texture2D>("Player2");
             var buttonTexture = _content.Load<Texture2D>("Home");
             var buttonFont = _content.Load<SpriteFont>("ButtonFont");
+            var DifficultybuttonTexture = _content.Load<Texture2D>("difficultyButton");
+            var DifficultybuttonFont = _content.Load<SpriteFont>("ButtonDifficultyFont");
+            var pausebuttonTexture = _content.Load<Texture2D>("Pause2");
 
             score = new Score(_content.Load<SpriteFont>("File"));
 
             var HomeButton = new Button(buttonTexture, buttonFont)
             {
-                Position = new Vector2(((screenWidth/2) - (buttonTexture.Width/2)), 450),
+                Position = new Vector2(((screenWidth / 2) - (buttonTexture.Width / 2)), 450),
                 Text = "",
             };
             HomeButton.Click += HomeButton_Click;
 
+            var PauseButton = new Button(pausebuttonTexture, buttonFont)
+            {
+                Position = new Vector2(425, 452),
+                Text = "",
+            };
+            PauseButton.Click += PauseButton_Click;
+
+            var DifficultyButton = new Button(DifficultybuttonTexture, DifficultybuttonFont)
+            {
+                Position = new Vector2(300, 455),
+                Text = "Play Style",
+            };
+            DifficultyButton.Click += DifficultyButton_Click;
             _components = new List<Component>()
       {
         HomeButton,
+        DifficultyButton,
+        PauseButton,
       };
 
             ball = new Ball(ballTexture)
@@ -55,7 +77,12 @@ namespace MonoGameV2.States
             };
             AIplayer = new AIPlayer(player2Texture)
             {
-                position = new Vector2(740, (screenHeight / 2) - (playerTexture.Height / 2)),
+                position = new Vector2(730, (screenHeight / 2) - (playerTexture.Height / 2)),
+                speed = 5,
+            };
+            Player1 = new Player(playerTexture)
+            {
+                position = new Vector2(20, (screenHeight / 2) - (playerTexture.Height / 2)),
             };
 
             //load in the sprites
@@ -63,37 +90,44 @@ namespace MonoGameV2.States
             {
                 new Sprite(_content.Load<Texture2D>("Background")),
                 ball,
-                new Player(playerTexture)
-                {
-                    position = new Vector2(20, (screenHeight/2) - (playerTexture.Height/2)),
-                },
+                Player1,
                 AIplayer,
             };
-        }
 
+            Pause = false;
+        }
+        
         public override void Update(GameTime gameTime)
         {
             // TODO: Add your update logic here
-            foreach (var sprite in sprites)
+            if (!Pause)
             {
-                sprite.Update(gameTime, sprites);
+
+                foreach (var sprite in sprites)
+                {
+                    sprite.Update(gameTime, sprites);
+                }
+
+                foreach (var component in _components)
+                    component.Update(gameTime);
+
+                AIMove();
+
+                if (score.playerScore == 5)
+                {
+                    _game.changeState(new Endgame(_game, _graphicsDevice, _content));
+                }
+                else if (score.AIscore == 5)
+                {
+                    _game.changeState(new EndGameLost(_game, _graphicsDevice, _content));
+                }
+                //base.Update(gameTime);
             }
-
-            foreach (var component in _components)
-                component.Update(gameTime);
-
-            AIMove();
-
-            if(score.playerScore == 5)
+            else
             {
-                background = "MenuBackground";
-                _game.changeState(new Endgame(_game, _graphicsDevice, _content));
-            } else if(score.AIscore == 5)
-            {
-                _game.changeState(new EndGameLost(_game, _graphicsDevice, _content));
+                foreach (var component in _components)
+                    component.Update(gameTime);
             }
-            //base.Update(gameTime);
-
         }
 
         public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
@@ -118,7 +152,7 @@ namespace MonoGameV2.States
         {
 
         }
-        
+
         public void AIMove()
         {
             if (ball.position.Y > AIplayer.position.Y && ball.position.X > screenWidth / 2)
@@ -138,6 +172,48 @@ namespace MonoGameV2.States
         private void HomeButton_Click(object sender, EventArgs e)
         {
             _game.changeState(new MenuState(_game, _graphicsDevice, _content));
+        }
+
+        private void PauseButton_Click(object sender, EventArgs e)
+        {
+            Pause = !Pause;
+        }
+
+        private void DifficultyButton_Click(object sender, EventArgs e)
+        {
+
+            currentYPosition = Player1.position.Y;
+            if (difficultyCase >= 2)
+            {
+                difficultyCase = 0;
+                setDifficulty();
+            }
+            else
+            {
+                difficultyCase++;
+                setDifficulty();
+            }
+
+            
+        }
+
+        public void setDifficulty()
+        {
+            switch (difficultyCase)
+            {
+                case 0:
+                    Player1.position.X = 30;
+                    Player1.position.Y = currentYPosition; 
+                    break;
+                case 1:
+                    Player1.position.X = 120;
+                    Player1.position.Y = currentYPosition;
+                    break;
+                case 2:
+                    Player1.position.X = 200;
+                    Player1.position.Y = currentYPosition;
+                    break;
+            }
         }
     }
 }

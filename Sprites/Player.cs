@@ -10,8 +10,6 @@ namespace MonoGameV2.Sprites
 {
     public class Player : Sprite
     {
-        //TouchCollection touchCollection;
-        
         public Player(Texture2D texture) : base(texture)
         {
             speed = 5f;
