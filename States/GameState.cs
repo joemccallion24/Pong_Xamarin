@@ -20,8 +20,9 @@ namespace MonoGameV2.States
         private AIPlayer AIplayer;
         private Player Player1;
         private List<Sprite> sprites;
-        private List<Component> _components;
+        private List<Component> _components, _componentsPause;
         private Score score;
+        private ScreenText screenFont;
         private int difficultyCase;
         private float currentYPosition;
         private bool Pause, Multiplayer;
@@ -42,40 +43,45 @@ namespace MonoGameV2.States
             var pausebuttonTexture = _content.Load<Texture2D>("Pause2");
 
             score = new Score(_content.Load<SpriteFont>("File"));
+            screenFont = new ScreenText(_content.Load<SpriteFont>("ScreenFont"));
 
             var HomeButton = new Button(buttonTexture, buttonFont)
             {
-                Position = new Vector2(365, 450),
+                Position = new Vector2(15, 450),
                 Text = "",
             };
             HomeButton.Click += HomeButton_Click;
 
             var PauseButton = new Button(pausebuttonTexture, buttonFont)
             {
-                Position = new Vector2(410, 452),
+                Position = new Vector2(screenWidth/2 - pausebuttonTexture.Width/2, 452),
                 Text = "",
             };
             PauseButton.Click += PauseButton_Click;
 
             var DifficultyButton = new Button(DifficultybuttonTexture, DifficultybuttonFont)
             {
-                Position = new Vector2(265, 455),
+                Position = new Vector2(255, 455),
                 Text = "Play Style",
             };
             DifficultyButton.Click += DifficultyButton_Click;
 
             var MultiplayerButton = new Button(DifficultybuttonTexture, DifficultybuttonFont)
             {
-                Position = new Vector2(470, 455),
+                Position = new Vector2(480, 455),
                 Text = "Player 2",
             };
             MultiplayerButton.Click += MultiplayerButton_Click;
-            _components = new List<Component>()
+            _componentsPause = new List<Component>()
       {
         HomeButton,
         DifficultyButton,
         PauseButton,
         MultiplayerButton,
+      };
+            _components = new List<Component>()
+      {
+        PauseButton,
       };
 
             ball = new Ball(ballTexture)
@@ -141,7 +147,7 @@ namespace MonoGameV2.States
             }
             else
             {
-                foreach (var component in _components)
+                foreach (var component in _componentsPause)
                     component.Update(gameTime);
             }
         }
@@ -154,10 +160,22 @@ namespace MonoGameV2.States
             _spriteBatch.Begin();
 
             foreach (var sprite in sprites) sprite.Draw(_spriteBatch);
-            foreach (var component in _components)
-                component.Draw(gameTime, _spriteBatch);
+            if (!Pause)
+            {
+                foreach (var component in _components)
+                    component.Draw(gameTime, _spriteBatch);
+            } else if (Pause)
+            {
+                foreach (var component in _componentsPause)
+                    component.Draw(gameTime, _spriteBatch);
+                screenFont.Draw(_spriteBatch);
+            }
 
             score.Draw(_spriteBatch);
+            if (ball.speed < 4 && score.playerScore == 0 && score.AIscore == 0)
+            {
+                screenFont.Draw(_spriteBatch); //drawn for the first 5 seconds 
+            }
 
             _spriteBatch.End();
 

@@ -19,8 +19,10 @@
     <File>/Users/josefmccallion/MonoGameV2/Content/pause2.png</File>
     <File>/Users/josefmccallion/MonoGameV2/Content/Player1.png</File>
     <File>/Users/josefmccallion/MonoGameV2/Content/player2.png</File>
+    <File>/Users/josefmccallion/MonoGameV2/Content/ScreenFont.spritefont</File>
   </SourceFiles>
   <DestFiles>
+    <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />

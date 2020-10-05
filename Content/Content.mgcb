@@ -178,3 +178,10 @@
 /processorParam:TextureFormat=Color
 /build:player2.png
 
+#begin ScreenFont.spritefont
+/importer:FontDescriptionImporter
+/processor:FontDescriptionProcessor
+/processorParam:PremultiplyAlpha=True
+/processorParam:TextureFormat=Compressed
+/build:ScreenFont.spritefont
+

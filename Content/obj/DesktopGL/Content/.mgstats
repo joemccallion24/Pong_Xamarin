@@ -14,3 +14,4 @@ Source File,Dest File,Processor Type,Content Type,Source File Size,Dest File Siz
 "/Users/josefmccallion/MonoGameV2/Content/pause2.png","/Users/josefmccallion/MonoGameV2/Content/bin/DesktopGL/Content/pause2.xnb","TextureProcessor","Texture2DContent",1511,2485,0.001645
 "/Users/josefmccallion/MonoGameV2/Content/Player1.png","/Users/josefmccallion/MonoGameV2/Content/bin/DesktopGL/Content/Player1.xnb","TextureProcessor","Texture2DContent",5020,5417,0.143416
 "/Users/josefmccallion/MonoGameV2/Content/player2.png","/Users/josefmccallion/MonoGameV2/Content/bin/DesktopGL/Content/player2.xnb","TextureProcessor","Texture2DContent",6018,9109,0.002068
+"/Users/josefmccallion/MonoGameV2/Content/ScreenFont.spritefont","/Users/josefmccallion/MonoGameV2/Content/bin/DesktopGL/Content/ScreenFont.xnb","FontDescriptionProcessor","SpriteFontContent",2008,70690,0.428891

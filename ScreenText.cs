@@ -4,22 +4,22 @@ using Microsoft.Xna.Framework;
 
 namespace MonoGameV2
 {
-    public class Score
+    public class ScreenText
     {
         public int playerScore;
         public int AIscore; //Maybe Player 2 score in future?
 
         private SpriteFont _font;
 
-        public Score(SpriteFont font)
+        public ScreenText(SpriteFont font)
         {
             _font = font;
         }
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.DrawString(_font, playerScore.ToString(), new Vector2(320, 70), Color.White);
-            spriteBatch.DrawString(_font, AIscore.ToString(), new Vector2(450, 70), Color.White);
+            spriteBatch.DrawString(_font, "FIRST TO FIVE", new Vector2(285, 20), Color.Black);
         }
     }
 }
+
