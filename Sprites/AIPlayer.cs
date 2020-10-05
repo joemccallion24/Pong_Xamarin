@@ -19,6 +19,26 @@ namespace MonoGameV2.Sprites
             position.Y = MathHelper.Clamp(position.Y, 0, GameState.screenHeight - _texture.Height);
 
             velocity = Vector2.Zero;
-        } 
+        }
+
+        public void Player2Move()
+        {
+            MouseState state = Mouse.GetState();
+            if (state.LeftButton == ButtonState.Pressed && state.Position.X > GameState.screenWidth/2)
+            {
+                if ((position.Y + _texture.Height / 2) < state.Y)
+                {
+                    velocity.Y = speed;
+                }
+                else if (position.Y > (state.Y - _texture.Height / 2.7))
+                {
+                    velocity.Y = -speed;
+                }
+                else if ((position.Y + _texture.Height / 2) == state.Y)
+                {
+                    velocity.Y = 0;
+                }
+            }
+        }
     }
 }

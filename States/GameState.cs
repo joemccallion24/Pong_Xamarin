@@ -24,7 +24,7 @@ namespace MonoGameV2.States
         private Score score;
         private int difficultyCase;
         private float currentYPosition;
-        private bool Pause;
+        private bool Pause, Multiplayer;
 
         public GameState(Game1 game, GraphicsDevice graphicsDevice, ContentManager content)
       : base(game, graphicsDevice, content)
@@ -45,29 +45,37 @@ namespace MonoGameV2.States
 
             var HomeButton = new Button(buttonTexture, buttonFont)
             {
-                Position = new Vector2(((screenWidth / 2) - (buttonTexture.Width / 2)), 450),
+                Position = new Vector2(365, 450),
                 Text = "",
             };
             HomeButton.Click += HomeButton_Click;
 
             var PauseButton = new Button(pausebuttonTexture, buttonFont)
             {
-                Position = new Vector2(425, 452),
+                Position = new Vector2(410, 452),
                 Text = "",
             };
             PauseButton.Click += PauseButton_Click;
 
             var DifficultyButton = new Button(DifficultybuttonTexture, DifficultybuttonFont)
             {
-                Position = new Vector2(300, 455),
+                Position = new Vector2(265, 455),
                 Text = "Play Style",
             };
             DifficultyButton.Click += DifficultyButton_Click;
+
+            var MultiplayerButton = new Button(DifficultybuttonTexture, DifficultybuttonFont)
+            {
+                Position = new Vector2(470, 455),
+                Text = "Player 2",
+            };
+            MultiplayerButton.Click += MultiplayerButton_Click;
             _components = new List<Component>()
       {
         HomeButton,
         DifficultyButton,
         PauseButton,
+        MultiplayerButton,
       };
 
             ball = new Ball(ballTexture)
@@ -95,6 +103,7 @@ namespace MonoGameV2.States
             };
 
             Pause = false;
+            Multiplayer = false;
         }
         
         public override void Update(GameTime gameTime)
@@ -111,7 +120,14 @@ namespace MonoGameV2.States
                 foreach (var component in _components)
                     component.Update(gameTime);
 
-                AIMove();
+                if (!Multiplayer)
+                {
+                    AIMove();
+                }
+                else if (Multiplayer)
+                {
+                    AIplayer.Player2Move();
+                }
 
                 if (score.playerScore == 5)
                 {
@@ -179,6 +195,11 @@ namespace MonoGameV2.States
             Pause = !Pause;
         }
 
+        private void MultiplayerButton_Click(object sender, EventArgs e)
+        {
+            Multiplayer = !Multiplayer;
+        }
+
         private void DifficultyButton_Click(object sender, EventArgs e)
         {
 
@@ -203,7 +224,7 @@ namespace MonoGameV2.States
             {
                 case 0:
                     Player1.position.X = 30;
-                    Player1.position.Y = currentYPosition; 
+                    Player1.position.Y = currentYPosition;
                     break;
                 case 1:
                     Player1.position.X = 120;

@@ -19,11 +19,11 @@ namespace MonoGameV2.Sprites
         {
             //if (input == null) throw new Exception("give input");
             MouseState state = Mouse.GetState();
-            if (state.LeftButton == ButtonState.Pressed)
+            if (state.LeftButton == ButtonState.Pressed && state.Position.X < GameState.screenWidth/2)
             {
                 if((position.Y + _texture.Height/2) < state.Y){
                         velocity.Y = speed;
-                } else if (position.Y > (state.Y - _texture.Height/2.5))
+                } else if (position.Y > (state.Y - _texture.Height/2.7))
                 {
                     velocity.Y = -speed;
                 }

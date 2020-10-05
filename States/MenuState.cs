@@ -24,7 +24,7 @@ namespace MonoGameV2.States
             var newGameButton = new Button(buttonTexture, buttonFont)
             {
                 Position = new Vector2(330, 250),
-                Text = "New Game",
+                Text = "Play Game",
             };
 
             newGameButton.Click += NewGameButton_Click;
