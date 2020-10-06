@@ -6,6 +6,7 @@ using Microsoft.Xna.Framework.Input;
 using MonoGameV2.Sprites;
 using System;
 using MonoGameV2.Controls;
+using MonoGameV2.Constants;
 
 namespace MonoGameV2.States
 {
@@ -27,97 +28,98 @@ namespace MonoGameV2.States
         private float currentYPosition;
         private bool Pause, Multiplayer;
 
-        public GameState(Game1 game, GraphicsDevice graphicsDevice, ContentManager content)
-      : base(game, graphicsDevice, content)
+    public GameState(Game1 game, GraphicsDevice graphicsDevice, ContentManager content)
+    : base(game, graphicsDevice, content)
+    {
+        difficultyCase = 0;
+        _spriteBatch = new SpriteBatch(_graphicsDevice);
+        //use this.Content to load your game content here
+        var ballTexture = _content.Load<Texture2D>("Ball");
+        var playerTexture = _content.Load<Texture2D>("Player1");
+        var player2Texture = _content.Load<Texture2D>("Player2");
+        var buttonTexture = _content.Load<Texture2D>("Home");
+        var buttonFont = _content.Load<SpriteFont>("ButtonFont");
+        var DifficultybuttonTexture = _content.Load<Texture2D>("difficultyButton");
+        var DifficultybuttonFont = _content.Load<SpriteFont>("ButtonDifficultyFont");
+        var pausebuttonTexture = _content.Load<Texture2D>("Pause2");
+
+        score = new Score(_content.Load<SpriteFont>("File"));
+        screenFont = new ScreenText(_content.Load<SpriteFont>("ScreenFont"));
+
+        var HomeButton = new Button(buttonTexture, buttonFont)
         {
-            difficultyCase = 0;
-            _spriteBatch = new SpriteBatch(_graphicsDevice);
-            //use this.Content to load your game content here
-            var ballTexture = _content.Load<Texture2D>("Ball");
-            var playerTexture = _content.Load<Texture2D>("Player1");
-            var player2Texture = _content.Load<Texture2D>("Player2");
-            var buttonTexture = _content.Load<Texture2D>("Home");
-            var buttonFont = _content.Load<SpriteFont>("ButtonFont");
-            var DifficultybuttonTexture = _content.Load<Texture2D>("difficultyButton");
-            var DifficultybuttonFont = _content.Load<SpriteFont>("ButtonDifficultyFont");
-            var pausebuttonTexture = _content.Load<Texture2D>("Pause2");
+            Position = new Vector2(15, 450),
+            Text = "",
+        };
+        HomeButton.Click += HomeButton_Click;
 
-            score = new Score(_content.Load<SpriteFont>("File"));
-            screenFont = new ScreenText(_content.Load<SpriteFont>("ScreenFont"));
+        var PauseButton = new Button(pausebuttonTexture, buttonFont)
+        {
+            Position = new Vector2(screenWidth/2 - pausebuttonTexture.Width/2, 452),
+            Text = "",
+        };
+        PauseButton.Click += PauseButton_Click;
 
-            var HomeButton = new Button(buttonTexture, buttonFont)
-            {
-                Position = new Vector2(15, 450),
-                Text = "",
-            };
-            HomeButton.Click += HomeButton_Click;
+        var DifficultyButton = new Button(DifficultybuttonTexture, DifficultybuttonFont)
+        {
+            Position = new Vector2(255, 455),
+            Text = "Play Style",
+        };
+        DifficultyButton.Click += DifficultyButton_Click;
 
-            var PauseButton = new Button(pausebuttonTexture, buttonFont)
-            {
-                Position = new Vector2(screenWidth/2 - pausebuttonTexture.Width/2, 452),
-                Text = "",
-            };
-            PauseButton.Click += PauseButton_Click;
+        var MultiplayerButton = new Button(DifficultybuttonTexture, DifficultybuttonFont)
+        {
+            Position = new Vector2(480, 455),
+            Text = "Player 2",
+        };
+        MultiplayerButton.Click += MultiplayerButton_Click;
 
-            var DifficultyButton = new Button(DifficultybuttonTexture, DifficultybuttonFont)
-            {
-                Position = new Vector2(255, 455),
-                Text = "Play Style",
-            };
-            DifficultyButton.Click += DifficultyButton_Click;
+        _componentsPause = new List<Component>()
+        {
+            HomeButton,
+            DifficultyButton,
+            PauseButton,
+            MultiplayerButton,
+        };
+        _components = new List<Component>()
+        {
+            PauseButton,
+        };
 
-            var MultiplayerButton = new Button(DifficultybuttonTexture, DifficultybuttonFont)
-            {
-                Position = new Vector2(480, 455),
-                Text = "Player 2",
-            };
-            MultiplayerButton.Click += MultiplayerButton_Click;
-            _componentsPause = new List<Component>()
-      {
-        HomeButton,
-        DifficultyButton,
-        PauseButton,
-        MultiplayerButton,
-      };
-            _components = new List<Component>()
-      {
-        PauseButton,
-      };
+        ball = new Ball(ballTexture)
+        {
+            position = new Vector2((screenWidth / 2) - (ballTexture.Width / 2), (screenHeight / 2) - (ballTexture.Height / 2)), //positions the ball in the centre of the screen
+            score = score,
+        };
 
-            ball = new Ball(ballTexture)
-            {
-                position = new Vector2((screenWidth / 2) - (ballTexture.Width / 2), (screenHeight / 2) - (ballTexture.Height / 2)), //positions the ball in the centre of the screen
-                score = score,
-            };
-            AIplayer = new AIPlayer(player2Texture)
-            {
-                position = new Vector2(730, (screenHeight / 2) - (playerTexture.Height / 2)),
-                speed = 5,
-            };
-            Player1 = new Player(playerTexture)
-            {
-                position = new Vector2(20, (screenHeight / 2) - (playerTexture.Height / 2)),
-            };
+        AIplayer = new AIPlayer(player2Texture)
+        {
+            position = new Vector2(730, (screenHeight / 2) - (playerTexture.Height / 2)),
+            speed = 5,
+        };
 
-            //load in the sprites
-            sprites = new List<Sprite>()
-            {
-                new Sprite(_content.Load<Texture2D>("Background")),
-                ball,
-                Player1,
-                AIplayer,
-            };
+        Player1 = new Player(playerTexture)
+        {
+            position = new Vector2(20, (screenHeight / 2) - (playerTexture.Height / 2)),
+        };
 
-            Pause = false;
-            Multiplayer = false;
-        }
+        //load in the sprites
+        sprites = new List<Sprite>()
+        {
+            new Sprite(_content.Load<Texture2D>("Background")),
+            ball,
+            Player1,
+            AIplayer,
+        };
+
+        Pause = false;
+        Multiplayer = false;
+    }
         
         public override void Update(GameTime gameTime)
         {
-            // TODO: Add your update logic here
             if (!Pause)
             {
-
                 foreach (var sprite in sprites)
                 {
                     sprite.Update(gameTime, sprites);
@@ -135,15 +137,14 @@ namespace MonoGameV2.States
                     AIplayer.Player2Move();
                 }
 
-                if (score.playerScore == 5)
+                if (score.playerScore == Constant.WIN_SCORE)
                 {
                     _game.changeState(new Endgame(_game, _graphicsDevice, _content));
                 }
-                else if (score.AIscore == 5)
+                else if (score.AIscore == Constant.WIN_SCORE)
                 {
                     _game.changeState(new EndGameLost(_game, _graphicsDevice, _content));
                 }
-                //base.Update(gameTime);
             }
             else
             {
@@ -156,7 +157,6 @@ namespace MonoGameV2.States
         {
             _graphicsDevice.Clear(Color.White);
 
-            // TODO: Add your drawing code here
             _spriteBatch.Begin();
 
             foreach (var sprite in sprites) sprite.Draw(_spriteBatch);
@@ -178,8 +178,6 @@ namespace MonoGameV2.States
             }
 
             _spriteBatch.End();
-
-            //base.Draw(gameTime);
         }
 
         public override void PostUpdate(GameTime gameTime)
@@ -232,8 +230,6 @@ namespace MonoGameV2.States
                 difficultyCase++;
                 setDifficulty();
             }
-
-            
         }
 
         public void setDifficulty()
@@ -241,15 +237,15 @@ namespace MonoGameV2.States
             switch (difficultyCase)
             {
                 case 0:
-                    Player1.position.X = 30;
+                    Player1.position.X = Constant.DEFENSIVE;
                     Player1.position.Y = currentYPosition;
                     break;
                 case 1:
-                    Player1.position.X = 120;
+                    Player1.position.X = Constant.BALANCED;
                     Player1.position.Y = currentYPosition;
                     break;
                 case 2:
-                    Player1.position.X = 200;
+                    Player1.position.X = Constant.ATTACKING;
                     Player1.position.Y = currentYPosition;
                     break;
             }

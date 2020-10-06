@@ -1,7 +1,7 @@
 ﻿using System;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Input.Touch;
+using MonoGameV2.Constants;
 using Microsoft.Xna.Framework.Input;
 using System.Collections.Generic;
 using MonoGameV2.States;
@@ -16,10 +16,6 @@ namespace MonoGameV2.Sprites
             private float? startSpeed;
             private bool isPlaying;
             private float timer = 0;
-
-            //ball speed increases every 5 seconds
-            public int incrementSpeed = 5;
-
 
             public Ball(Texture2D texture) : base(texture)
             {
@@ -40,7 +36,7 @@ namespace MonoGameV2.Sprites
                 if (!isPlaying) return;
 
             timer += (float)gameTime.ElapsedGameTime.TotalSeconds;
-            if(timer > incrementSpeed)
+            if(timer > Constant.INCREMENT_SPEED_TIME)
             {
                 speed++;
                 timer = 0;
