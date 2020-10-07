@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <SourceFile>/Users/josefmccallion/MonoGameV2/Content/ScreenFont.spritefont</SourceFile>
-  <SourceTime>2020-10-05T13:01:00.2261093+01:00</SourceTime>
+  <SourceTime>2020-10-07T11:54:37.8123827+01:00</SourceTime>
   <DestFile>/Users/josefmccallion/MonoGameV2/Content/bin/DesktopGL/Content/ScreenFont.xnb</DestFile>
-  <DestTime>2020-10-05T13:02:35.0999223+01:00</DestTime>
+  <DestTime>2020-10-07T11:54:39.8178521+01:00</DestTime>
   <Importer>FontDescriptionImporter</Importer>
   <ImporterTime>2020-08-10T16:17:54+01:00</ImporterTime>
   <Processor>FontDescriptionProcessor</Processor>
